@@ -1,6 +1,7 @@
 //Import components
 import React from "react";
 import Expenses from "./components/Expenses";
+import NewExpense from "./newExpense/NewExpense";
 
 //App component
 function App() {
@@ -12,7 +13,12 @@ function App() {
       amount: 294.67,
       date: new Date(2021, 1, 25),
     },
-    { id: "e2", title: "New TV", amount: 294.67, date: new Date(2021, 2, 28) },
+    { 
+      id: "e2", 
+      title: "New TV", 
+      amount: 294.67, 
+      date: new Date(2021, 2, 28) 
+    },
     {
       id: "e3",
       title: "Car Insurance",
@@ -27,12 +33,17 @@ function App() {
     },
   ];
 
-  //I create a div where inside there are a h2 tag and another div with Expenses component for print the expenses before.
-  //At Expenses component pass one element of expenses constant
+  //I create a div where inside there are a h2 tag and another two div with NewExpense for insert a new expense and Expenses components for print the expenses before.
+  //A NewExpense component pass expenses constant and Expenses component pass one element of expenses constant
   return React.createElement(
     "div",
     {},
     React.createElement("h2", {}, "Prima applicazione con React"),
+    React.createElement(
+      "div",
+      {},
+      React.createElement(NewExpense, {expenses: expenses})
+    ),
     React.createElement(
       "div",
       {},

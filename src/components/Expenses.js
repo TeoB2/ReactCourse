@@ -11,10 +11,10 @@ const Expenses = (props) =>
   //At ExpenseDate and ExprenseItem components pass date, title and amount through props.expense
   //which I previously passed from the App component
   return (
-    <Card className="expenses">
-      <ExpenseDate date={props.expense.date}/>
-      <ExpenseItem title={props.expense.title} amount={props.expense.amount}/>
-    </Card>
+      <Card className="expenses">
+        <ExpenseDate date={props.expense.date}/>
+        <ExpenseItem title={props.expense.title} amount={props.expense.amount} id={props.expense.id}/>
+      </Card>
   );
 }
 
