@@ -1,7 +1,12 @@
 //Import component and css
 import React from "react";
 import ExpenseForm from "./ExpenseForm";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/NewExpense.css";
+import { Grid, Row, Col } from 'react-bootstrap';
+
 
 //NewExpense component in arrow method
 const NewExpense = (props) => {
@@ -11,6 +16,28 @@ const NewExpense = (props) => {
       props.onAddExpense(enteredExpenseData);
   };
 
+
+  const openCloseAddExpensePanel = () => {
+    let arrowDownAddExpense = document.getElementById("arrowDownAddExpense");
+    let arrowUpAddExpense = document.getElementById("arrowUpAddExpense");
+    let addNewExpensePanel = document.getElementById("addNewExpensePanel");
+    
+    if(arrowDownAddExpense.classList.contains("d-none"))
+    {
+      arrowDownAddExpense.classList.remove("d-none");
+      arrowUpAddExpense.classList.add("d-none");
+      addNewExpensePanel.classList.add("d-none");
+    }
+    else if(arrowUpAddExpense.classList.contains("d-none"))
+    {
+      arrowDownAddExpense.classList.add("d-none");
+      arrowUpAddExpense.classList.remove("d-none");
+      addNewExpensePanel.classList.remove("d-none");
+    }
+
+    return true;
+  };
+
   //Returns div with inside ExpenseForm component.
   //At ExpenseForm components pass expenses through props.expenses
   //which I previously passed from the App component
@@ -18,7 +45,18 @@ const NewExpense = (props) => {
   //take it from his child recall a saveExpenseDataHandler function
   return (
     <div className="new-expense">
-      <ExpenseForm expenses={props.expenses} onSaveExpenseData={saveExpenseDataHandler} />
+      <Row>
+        <Col xs={10}>
+          <h3 className="m-0">Add Expense</h3>
+          </Col>
+        <Col xs={2} className="d-flex justify-content-end align-items-center">
+          <FontAwesomeIcon icon={faChevronDown} id="arrowDownAddExpense" className="h3 cursorHandler m-0" title="Click for add a new expense" onClick={openCloseAddExpensePanel}/>
+          <FontAwesomeIcon icon={faChevronUp} id="arrowUpAddExpense" className="h3 cursorHandler d-none m-0" title="Click for close add new expense panel" onClick={openCloseAddExpensePanel}/>
+        </Col>
+      </Row>
+      <Row className="d-none mt-4" id="addNewExpensePanel">
+        <ExpenseForm expenses={props.expenses} onSaveExpenseData={saveExpenseDataHandler} />
+      </Row>
     </div>
   );
 };
