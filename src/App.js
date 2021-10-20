@@ -1,12 +1,12 @@
 //Import components
-import React from "react";
+import React, { useState } from "react";
 import Expenses from "./components/Expenses";
 import NewExpense from "./newExpense/NewExpense";
 
 //App component
 function App() {
-  //constant with expenses to pass to pass to Expenses component (static data)
-  const expenses = [
+  //Variable with expenses to pass to pass to Expenses component
+  let expenses = [
     {
       id: "e1",
       title: "Toilette Paper",
@@ -33,8 +33,29 @@ function App() {
     },
   ];
 
+  //Constant with previous expenses and js method for update expense after insert a new expense
+  const [expensesUpdated, setExpenses] = useState(expenses);
+
+  //Arrow method recall when comes inserted a new expense
+  const addExpenseDataHandler = (expense) => {
+    //Constant with a new expense, comes add id and date object
+    const expenseData = {
+      id: "e" + (expenses.length + 1),
+      ...expense,
+      date: new Date(expense.data)
+    };
+
+    //Concat this new expense with previous expenses
+    expenses = expenses.concat(expenseData); 
+
+    //Call method for change expenses variable and update list without refresh the page
+    setExpenses(expenses);
+  };
+
+  expenses = expensesUpdated;
+
   //I create a div where inside there are a h2 tag and another two div with NewExpense for insert a new expense and Expenses components for print the expenses before.
-  //A NewExpense component pass expenses constant and Expenses component pass one element of expenses constant
+  //A NewExpense component pass expenses constant and Expenses component pass one element of expenses constant (from child to parent)
   return React.createElement(
     "div",
     {},
@@ -42,15 +63,12 @@ function App() {
     React.createElement(
       "div",
       {},
-      React.createElement(NewExpense, {expenses: expenses})
+      React.createElement(NewExpense, {expenses: expenses, onAddExpense: addExpenseDataHandler})
     ),
     React.createElement(
       "div",
       {},
-      React.createElement(Expenses, { expense: expenses[0] }),
-      React.createElement(Expenses, { expense: expenses[1] }),
-      React.createElement(Expenses, { expense: expenses[2] }),
-      React.createElement(Expenses, { expense: expenses[3] })
+      React.createElement(Expenses, { expenses: expenses})
     )
   );
 }

@@ -7,14 +7,18 @@ import "../css/Expenses.css";
 //Expenses component in arrow method
 const Expenses = (props) =>
 {
+  let expenses = props.expenses;
+  //Cycle all expenses
+  const expense = expenses.map(expense => (<Card className="expenses" key={expense.id}> <ExpenseDate date={expense.date}/> <ExpenseItem title={expense.title} amount={expense.amount} id={expense.id}/> </Card>));
+
   //Returns Card component container with inside ExpenseDate and ExprenseItem components. 
-  //At ExpenseDate and ExprenseItem components pass date, title and amount through props.expense
+  //At ExpenseDate and ExprenseItem components pass date, title and amount through props.expenses
   //which I previously passed from the App component
   return (
-      <Card className="expenses">
-        <ExpenseDate date={props.expense.date}/>
-        <ExpenseItem title={props.expense.title} amount={props.expense.amount} id={props.expense.id}/>
-      </Card>
+    <div>
+      {expense}
+    </div>
+    
   );
 }
 

@@ -43,13 +43,13 @@ const ExpenseForm = (props) => {
             const year = expenses[i].date.getFullYear();
 
             //Concatenate a warning string with the date of the expense already made with the same title
-            warningTitle += "You have already entered this expense on " + month + " " + day + " " + year + "\n";
+            warningTitle += "You have already entered this expense on " + month + " " + day + " " + year + "<br>";
         }
 
         //Selector on DOM item with warning title 
         let elementWarningTitle = document.getElementById("warningTitle");
 
-        //If warningTitle is empty I add the class "d-none" at elemnt with id "warningTitle"
+        //If warningTitle is empty I add the class "d-none" at element with id "warningTitle"
         //else I remove the class "d-none" for show the message
         if(typeof warningTitle == "undefined" && warningTitle.length <= 0)
         {
@@ -62,6 +62,8 @@ const ExpenseForm = (props) => {
 
         //Set string at DOM element with id "warningTitle", also if is empty
         elementWarningTitle.innerHTML = warningTitle;
+
+        return true;
     };
 
 
@@ -72,6 +74,8 @@ const ExpenseForm = (props) => {
 
         //Call method for change expense amount and update it without refresh the page
         setEnteredAmount(newAmount);
+
+        return true;
     }
 
 
@@ -82,6 +86,8 @@ const ExpenseForm = (props) => {
 
         //Call method for change expense date and update it without refresh the page
         setEnteredDate(newDate);
+
+        return true;
     }
 
 
@@ -89,15 +95,32 @@ const ExpenseForm = (props) => {
     const formSubmitHandler = (event) => {
         //Delete all default behaviour
         event.preventDefault();
-
+        
         //Constant with new amount value
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
-            data: new Date(enteredDate)
+            amount: parseFloat(enteredAmount),
+            data: new Date(enteredDate.replaceAll('-', ', '))
         }
 
-        console.log(expenseData);
+        //I pass expenseData to the parent component
+        props.onSaveExpenseData(expenseData);
+
+        //Clear all input after submit
+        setEnteredTitle("");
+        setEnteredAmount("");
+        setEnteredDate("");
+
+        //Selector on DOM item with warning title 
+        let elementWarningTitle = document.getElementById("warningTitle");
+
+        //I add the class "d-none" at element with id "warningTitle"
+        elementWarningTitle.classList.add("d-none");
+
+        //Set empty string at DOM element with id "warningTitle"
+        elementWarningTitle.innerHTML = "";
+
+        return true;
     };
 
     //Returns to where we can enter an expense
@@ -105,15 +128,15 @@ const ExpenseForm = (props) => {
         <div className="new-expense__controls">
             <div className="new-expense__control">
                 <label for="newTitle">Title</label>
-                <input type="text" id="newTitle" onChange={titleChangeHandler} required />
+                <input type="text" id="newTitle" onChange={titleChangeHandler} value={enteredTitle} autoComplete="off" required />
             </div>
             <div className="new-expense__control">
                 <label for="newAmount">Amount</label>
-                <input type="number" min="0.01" step="0.01" id="newAmount" onChange={amountChangeHandler} required />
+                <input type="number" min="0.01" step="0.01" id="newAmount" onChange={amountChangeHandler} value={enteredAmount} autoComplete="off" required />
             </div>
             <div className="new-expense__control">
                 <label for="newDate">Date</label>
-                <input type="date" id="newDate" min="2019-01-01" max="2022-12-31" onChange={dateChangeHandler} required />
+                <input type="date" id="newDate" min="2019-01-01" max="2022-12-31" onChange={dateChangeHandler} value={enteredDate} required />
             </div>
         </div>
         <div className="new-expense__actions">
