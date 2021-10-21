@@ -100,7 +100,8 @@ const ExpenseForm = (props) => {
         const expenseData = {
             title: enteredTitle,
             amount: parseFloat(enteredAmount),
-            data: new Date(enteredDate.replaceAll('-', ', '))
+            data: new Date(enteredDate.replaceAll('-', ', ')),
+            class: ""
         }
 
         //I pass expenseData to the parent component

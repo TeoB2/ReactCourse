@@ -17,17 +17,20 @@ const NewExpense = (props) => {
   };
 
 
+  //Arrow method for open-close the insertion of new expenses
   const openCloseAddExpensePanel = () => {
     let arrowDownAddExpense = document.getElementById("arrowDownAddExpense");
     let arrowUpAddExpense = document.getElementById("arrowUpAddExpense");
     let addNewExpensePanel = document.getElementById("addNewExpensePanel");
     
+    //Close panel
     if(arrowDownAddExpense.classList.contains("d-none"))
     {
       arrowDownAddExpense.classList.remove("d-none");
       arrowUpAddExpense.classList.add("d-none");
       addNewExpensePanel.classList.add("d-none");
     }
+    //Open panel
     else if(arrowUpAddExpense.classList.contains("d-none"))
     {
       arrowDownAddExpense.classList.add("d-none");
@@ -37,6 +40,7 @@ const NewExpense = (props) => {
 
     return true;
   };
+
 
   //Returns div with inside ExpenseForm component.
   //At ExpenseForm components pass expenses through props.expenses
@@ -48,7 +52,7 @@ const NewExpense = (props) => {
       <Row>
         <Col xs={10}>
           <h3 className="m-0">Add Expense</h3>
-          </Col>
+        </Col>
         <Col xs={2} className="d-flex justify-content-end align-items-center">
           <FontAwesomeIcon icon={faChevronDown} id="arrowDownAddExpense" className="h3 cursorHandler m-0" title="Click for add a new expense" onClick={openCloseAddExpensePanel}/>
           <FontAwesomeIcon icon={faChevronUp} id="arrowUpAddExpense" className="h3 cursorHandler d-none m-0" title="Click for close add new expense panel" onClick={openCloseAddExpensePanel}/>

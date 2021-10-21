@@ -9,7 +9,7 @@ const ExpenseItem = props =>
   const inputId = "newTitle_" + props.id
 
   //Constant with previous title and js method for update expense title after click button
-  const [title, setTitle] = useState(props.title)
+  const [title, setTitle] = useState(props.title);
 
   //Function in arrow method call when button is clicked
   const clickHandler = () =>

@@ -37,10 +37,6 @@
     background-color: #ddb3f8;
   }
 
-  .d-none {
-    display: none;
-  }
-
   .cursorHandler {
     cursor: pointer;
   }
