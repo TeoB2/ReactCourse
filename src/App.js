@@ -12,29 +12,25 @@ function App() {
       id: "e1",
       title: "Toilette Paper",
       amount: 294.67,
-      date: new Date(2021, 1, 25),
-      class: ""
+      date: new Date(2021, 1, 25)
     },
     { 
       id: "e2", 
       title: "New TV", 
       amount: 294.67, 
-      date: new Date(2021, 2, 28),
-      class: "" 
+      date: new Date(2021, 2, 28)
     },
     {
       id: "e3",
       title: "Car Insurance",
       amount: 294.67,
-      date: new Date(2021, 7, 12),
-      class: ""
+      date: new Date(2021, 7, 12)
     },
     {
       id: "e4",
       title: "New Desktop",
       amount: 294.67,
-      date: new Date(2019, 2, 6),
-      class: ""
+      date: new Date(2019, 2, 6)
     },
   ];
 
@@ -93,7 +89,7 @@ function App() {
     React.createElement(
       "div",
       {},
-      React.createElement(ExpenseFilter, {expenses: expenses, onSetYearFilter: yearFilter})
+      React.createElement(ExpenseFilter, {expenses: expenses, selected: yearFilterSelected, onSetYearFilter: yearFilter})
     ),
     React.createElement(
       "div",

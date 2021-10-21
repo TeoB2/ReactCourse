@@ -8,3 +8,12 @@
     border-radius: 12px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
+
+.expenses p {
+    color: white!important;
+    font-size: 25px;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    font-weight: 700;
+}

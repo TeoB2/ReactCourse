@@ -9,8 +9,9 @@ import "../css/ExpenseFilter.css";
 
 //ExpenseFilter component in arrow method
 const ExpenseFilter = (props) => {
-    //Constant with all expenses
+    //Constant with all expenses and year selected
     const expenses = props.expenses;
+    const selected = props.selected;
 
     //Arrow method for open-close expenses filter
     const openCloseExpenseFilter = () => {
@@ -47,7 +48,8 @@ const ExpenseFilter = (props) => {
     return (
         <div className="expense-filter">
           <Row>
-            <Col xs={10}>
+            <Col xs={2} />
+            <Col xs={8}>
               <h3 className="m-0">Expense Filter</h3>
               </Col>
             <Col xs={2} className="d-flex justify-content-end align-items-center">
@@ -56,7 +58,7 @@ const ExpenseFilter = (props) => {
             </Col>
           </Row>
           <Row className="d-none mt-4" id="expenseFilter">
-            <ExpenseFilterSelect expenses={expenses} onSetYearFilter={yearFilterSelected}/>
+            <ExpenseFilterSelect expenses={expenses} selected={selected} onSetYearFilter={yearFilterSelected}/>
           </Row>
       </div>
     );

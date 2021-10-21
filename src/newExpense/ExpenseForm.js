@@ -100,8 +100,7 @@ const ExpenseForm = (props) => {
         const expenseData = {
             title: enteredTitle,
             amount: parseFloat(enteredAmount),
-            data: new Date(enteredDate.replaceAll('-', ', ')),
-            class: ""
+            data: new Date(enteredDate.replaceAll('-', ', '))
         }
 
         //I pass expenseData to the parent component
@@ -124,6 +123,21 @@ const ExpenseForm = (props) => {
         return true;
     };
 
+    const cancelForm = () => {
+        //Clear all input after cancel
+        setEnteredTitle("");
+        setEnteredAmount("");
+        setEnteredDate("");
+
+        let arrowDownAddExpense = document.getElementById("arrowDownAddExpense");
+        let arrowUpAddExpense = document.getElementById("arrowUpAddExpense");
+        let addNewExpensePanel = document.getElementById("addNewExpensePanel");
+
+        arrowDownAddExpense.classList.remove("d-none");
+        arrowUpAddExpense.classList.add("d-none");
+        addNewExpensePanel.classList.add("d-none");
+    };
+
     //Returns to where we can enter an expense
     return <form onSubmit={formSubmitHandler}>
         <div className="new-expense__controls">
@@ -141,6 +155,7 @@ const ExpenseForm = (props) => {
             </div>
         </div>
         <div className="new-expense__actions">
+            <button type="button" onClick={cancelForm}>Cancel</button>
             <button type="submit">Add Expense</button>
         </div>
         <div id="warningTitle" className="d-none warningTitle"></div>

@@ -11,34 +11,24 @@ const Expenses = (props) =>
   let yearFilter = props.yearFilterSelected;
 
   //Check if there are a year filter
-  if(typeof yearFilter != "undefined")
+  if(yearFilter.length > 0)
   {
-    for(let i = 0; i < expenses.length; i++)
-    {
-      if(typeof expenses[i] == "undefined" || expenses[i].date == "undefined" || expenses[i].length <= 0)
-      {
-        continue; 
-      }
-  
-      let date = new Date(expenses[i].date);
-      let year = date.getFullYear();
-  
-      //If the expense year is the same or there aren't a filter year class remain empty
-      if(year == yearFilter || yearFilter.length <= 0)
-      {
-        expenses[i].class = "";
-      }
-      //Else update class with "d-none"
-      else
-      {
-        expenses[i].class = "d-none";
-      }      
-    }
+    expenses = props.expenses.filter(expense => {
+      return expense.date.getFullYear().toString() === yearFilter
+    });
   }
 
-
   //Cycle all expenses
-  const expense = expenses.map(expense => (<Card className={"expenses " + expense.class} key={expense.id}><ExpenseDate date={expense.date}/><ExpenseItem title={expense.title} amount={expense.amount} id={expense.id}/></Card>));
+  let expense;
+  if(typeof expenses != "undefined" && expenses.length > 0)
+  {
+    expense = expenses.map(expense => (<Card className={"expenses"} key={expense.id}><ExpenseDate date={expense.date}/><ExpenseItem title={expense.title} amount={expense.amount} id={expense.id}/></Card>));
+  }
+  else
+  {
+    expense = <div className={"expenses"}><p >No expenses found</p></div>;
+  }
+  
 
   //Returns Card component container with inside ExpenseDate and ExprenseItem components. 
   //At ExpenseDate and ExprenseItem components pass date, title and amount through props.expenses

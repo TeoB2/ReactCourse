@@ -86,8 +86,8 @@ const ExpenseFilterSelect = (props) => {
                 </Col>
                 <Col xs={3} sm={3} md={2}>
                     <div className="m-0 d-flex justify-content-start align-items-center">
-                        <select onChange={newYearFilterSelected}>
-                            <option value=""></option>
+                        <select onChange={newYearFilterSelected} value={props.selected}>
+                            <option value="">All</option>
                             {expenseYearsOption}
                         </select>
                     </div>
