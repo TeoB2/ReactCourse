@@ -2,6 +2,7 @@
 import Card from "./Card";
 import ExpenseDate from "./ExpenseDate";
 import ExpenseItem from "./ExpenseItem";
+import ExpenseChart from "../chart/ExpenseChart";
 import "../css/Expenses.css";
 
 //Expenses component in arrow method
@@ -35,6 +36,7 @@ const Expenses = (props) =>
   //which I previously passed from the App component
   return (
     <div>
+      <ExpenseChart expenses={expenses}/>
       {expense}
     </div>
     
