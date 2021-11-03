@@ -1,3 +1,4 @@
+//import components
 import React from "react";
 import classes from "./HeaderCartButton.module.css";
 import CartIcon from "../Cart/CartIcon";
@@ -16,4 +17,5 @@ const HeaderCartButton = (props) => {
             );
 };
 
+//export component
 export default HeaderCartButton;

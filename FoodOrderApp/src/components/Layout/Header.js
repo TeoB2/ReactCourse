@@ -1,3 +1,4 @@
+//import components
 import React, { Fragment } from "react";
 import classes from "./Header.module.css";
 import mealsImage from "../../assets/meals.jpg";
@@ -5,6 +6,7 @@ import HeaderCartButton from "./HeaderCartButton";
 
 const Header = (props) => {
     return  (
+                //React.Fragment for don't add a div, header with HeaderCartButton component and an image
                 <Fragment>
                     <header className={classes.header}>
                         <h1>ReactMeals</h1>
@@ -17,5 +19,5 @@ const Header = (props) => {
             )
 };
 
-
+//export component
 export default Header;
