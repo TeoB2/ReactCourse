@@ -1,4 +1,6 @@
 //import components
+import Card from "../UI/Card";
+import MealItem from "./MealItem/MealItem";
 import classes from "./AvailableMeals.module.css";
 
 //array with meals available
@@ -32,14 +34,16 @@ const DUMMY_MEALS = [
 const AvailableMeals = () => {
 
     //cycle of all meals
-    const mealsList = DUMMY_MEALS.map(meal => <li key={meal.id}>{meal.name}</li>);
+    const mealsList = DUMMY_MEALS.map(meal => <MealItem name={meal.name} description={meal.description} price={meal.price} id={meal.id} />);
 
-    //unordinate list of available meals
+    //unordinate list of available meals inside Card component
     return  (
                 <section className={classes.meals}>
-                    <ul>
-                        {mealsList}
-                    </ul>
+                    <Card>
+                        <ul>
+                            {mealsList}
+                        </ul>
+                    </Card>
                 </section>
             );
 }
