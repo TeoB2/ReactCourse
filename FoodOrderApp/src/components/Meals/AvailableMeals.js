@@ -34,7 +34,7 @@ const DUMMY_MEALS = [
 const AvailableMeals = () => {
 
     //cycle of all meals
-    const mealsList = DUMMY_MEALS.map(meal => <MealItem name={meal.name} description={meal.description} price={meal.price} id={meal.id} />);
+    const mealsList = DUMMY_MEALS.map(meal => <MealItem key={meal.id} name={meal.name} description={meal.description} price={meal.price} id={meal.id} />);
 
     //unordinate list of available meals inside Card component
     return  (
