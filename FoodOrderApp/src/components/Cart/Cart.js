@@ -7,11 +7,16 @@ import classes from "./Cart.module.css";
 
 const Cart = props => {
 
+    //get cart item
     const cartCtx = useContext(CartContext);
 
-    const cartItemRemoveHandler = id => {};
+    const cartItemRemoveHandler = id => {
+        cartCtx.removeItem(id);
+    };
 
-    const cartItemAddHandler = item => {};
+    const cartItemAddHandler = item => {
+        cartCtx.addItem({...item, amount: 1});
+    };
 
 
     //cycle all cart items element
@@ -28,8 +33,10 @@ const Cart = props => {
                             }
                         </ul>;
 
+    //bool if cart is empty or not
     const hasItems = cartCtx.items.length > 0;
 
+    //fixed price and concatenate $
     const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
 
     //return a modal with all cart items element

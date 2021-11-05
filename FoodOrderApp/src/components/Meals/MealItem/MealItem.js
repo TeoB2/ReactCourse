@@ -5,6 +5,7 @@ import CartContext from "../../../store/cart-context"
 import classes from "./MealItem.module.css";
 
 const MealItem = props => {
+    //get cart item
     const cartCtx = useContext(CartContext);
 
     //item price
