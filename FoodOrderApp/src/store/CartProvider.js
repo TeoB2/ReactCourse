@@ -7,17 +7,22 @@ const defaultCartState = {
     totalAmount: 0
 };
 
+//update the cart
 const cartReducer = (state, action) => {
+    //add item
     if(action.type === "ADD")
     {
+        //search item into the cart
         const existingCartItemIndex = state.items.findIndex(item => item.id === action.item.id);
 
+        //get item 
         const existingCartItem = state.items[existingCartItemIndex];
         
         let updateItems;
 
         if(existingCartItem)
         {
+            //update amount
             const updateItem = {
                 ...existingCartItem,
                 amount: existingCartItem.amount + action.item.amount
@@ -28,44 +33,54 @@ const cartReducer = (state, action) => {
         }
         else
         {
+            //add item
             updateItems = state.items.concat(action.item);
         }
 
-        
+        //update total amount
         const totalUpdateAmount = state.totalAmount + action.item.price * action.item.amount;
 
+        //return new cart
         return {
             items: updateItems,
             totalAmount: totalUpdateAmount
         };
     }
+    //remove item
     else if(action.type === "REMOVE")
     {
+        //search item into the cart
         const existingCartItemIndex = state.items.findIndex(item => item.id === action.id);
 
+        //get item 
         const existingCartItem = state.items[existingCartItemIndex];
 
         let updateItems;
         
         if(existingCartItem)
         {
+            //update amount
             const updateItem = {
                 ...existingCartItem,
                 amount: existingCartItem.amount - 1
             };
 
+            //if amount is minor than 1 I remove the item
             if(updateItem.amount < 1)
             {
                 updateItems = state.items.filter(item => item.id !== action.id);
             }
             else
             {
+                //update item
                 updateItems = [...state.items]
                 updateItems[existingCartItemIndex] = updateItem;
             }
 
+            //update total amount
             const totalUpdateAmount = state.totalAmount - existingCartItem.price;
 
+            //return new cart
             return {
                 items: updateItems,
                 totalAmount: totalUpdateAmount

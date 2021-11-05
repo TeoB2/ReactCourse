@@ -11,16 +11,18 @@ const Cart = props => {
     const cartCtx = useContext(CartContext);
 
     const cartItemRemoveHandler = id => {
+        //use removeItem property and pass an item id
         cartCtx.removeItem(id);
     };
 
     const cartItemAddHandler = item => {
+        //use addItem property and pass an item and amount
         cartCtx.addItem({...item, amount: 1});
     };
 
 
     //cycle all cart items element
-    const cartItems =   <ul className={classes["cart-item"]}>
+    const cartItems =    <ul className={classes["cart-item"]}>
                             {cartCtx.items.map(item => 
                                 <CartItem 
                                     key={item.id} 
